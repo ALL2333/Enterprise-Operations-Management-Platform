@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huibai.eomp.mapper.EmployeesMapper">
+
+    <select id="selectEmployeePage" resultType="com.huibai.eomp.vo.EmployeeVO">
+        SELECT
+        e.*,
+        u.real_name, u.username, u.phone, u.email,
+        d.name as dept_name
+        FROM employees e
+        LEFT JOIN users u ON e.user_id = u.id
+        LEFT JOIN departments d ON u.department_id = d.id
+        <where>
+            <if test="deptId != null">
+                AND (u.department_id = #{deptId})
+            </if>
+            <if test="name != null and name != ''">
+                AND u.real_name LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="employeeNumber != null and employeeNumber != ''">
+                AND e.employee_number = #{employeeNumber}
+            </if>
+            <if test="status != null and status != ''">
+                AND e.status = #{status}
+            </if>
+        </where>
+        ORDER BY e.id DESC
+    </select>
+
+    <select id="selectEmployeeByUserId" resultType="com.huibai.eomp.vo.EmployeeVO">
+        SELECT
+            e.*, u.real_name, u.username, u.phone, u.email, d.name as dept_name
+        FROM employees e
+                 LEFT JOIN users u ON e.user_id = u.id
+                 LEFT JOIN departments d ON u.department_id = d.id
+        WHERE e.user_id = #{userId}
+    </select>
+
+</mapper>

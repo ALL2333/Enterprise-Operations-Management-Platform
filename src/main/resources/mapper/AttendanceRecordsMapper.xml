@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huibai.eomp.mapper.AttendanceRecordsMapper">
+
+    <resultMap id="BaseResultMap" type="com.huibai.eomp.entity.AttendanceRecords">
+        <id column="id" property="id" />
+        <result column="user_id" property="userId" />
+        <result column="work_date" property="workDate" />
+        <result column="clock_in_time" property="clockInTime" />
+        <result column="clock_out_time" property="clockOutTime" />
+        <result column="clock_in_status" property="clockInStatus" />
+        <result column="clock_out_status" property="clockOutStatus" />
+        <result column="is_exception" property="isException" />
+        <result column="lat_lng" property="latLng" />
+        <result column="remark" property="remark" />
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, user_id, work_date, clock_in_time, clock_out_time, clock_in_status, clock_out_status, is_exception, lat_lng, remark
+    </sql>
+
+</mapper>
